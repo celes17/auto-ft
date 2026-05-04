@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "auto-ft"
-version = "0.1.0"
+version = "0.1.1"
 description = "Agentic LoRA fine-tuning CLI tool wrapping ostris/ai-toolkit."
 readme = "README.md"
 requires-python = ">=3.11"
