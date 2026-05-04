@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "auto-ft"
+version = "0.1.0"
+description = "Agentic LoRA fine-tuning CLI tool wrapping ostris/ai-toolkit."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "rychen17", email = "rychen17@yahoo.co.jp" }]
+keywords = ["lora", "fine-tuning", "stable-diffusion", "claude", "ostris"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "typer>=0.24,<1.0",
+    "pydantic>=2.13,<3.0",
+    "PyYAML>=6.0,<7.0",
+    "pillow>=11.0,<13",
+    "safetensors>=0.5,<1.0",
+]
+
+[project.optional-dependencies]
+dev = ["ruff>=0.15,<1.0", "pytest>=9.0,<10.0"]
+
+[project.scripts]
+auto_ft = "auto_ft.cli:_entry"
+
+[project.urls]
+Repository = "https://github.com/celes17/auto-ft"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/auto_ft"]
+
+[dependency-groups]
+dev = ["ruff>=0.15,<1.0", "pytest>=9.0,<10.0"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["spike"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.ruff.format]
+quote-style = "double"
+line-ending = "lf"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers"]
+markers = [
+    "gpu: requires CUDA GPU (deselect with '-m \"not gpu\"')",
+    "claude: requires interactive Claude Code session (deselect with '-m \"not claude\"')",
+]

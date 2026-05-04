@@ -1,0 +1,20 @@
+# Default: treat all text files as LF on checkout, regardless of platform.
+# This prevents Windows runners (autocrlf=true by default) from converting
+# Python sources to CRLF and tripping ruff format --check, which expects
+# LF per pyproject.toml [tool.ruff.format] line-ending = "lf".
+* text=auto eol=lf
+
+# Windows-native script types: keep CRLF (the Windows shell expects it).
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files: never normalize.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.safetensors binary
+*.ckpt binary
+*.ico binary
+*.pdf binary
